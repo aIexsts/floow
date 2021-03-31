@@ -1,11 +1,11 @@
 package com.challenge.floow.services;
 
-import com.challenge.floow.model.Driver;
+import com.challenge.floow.model.DriverDto;
 import org.joda.time.DateTime;
 import java.util.List;
 
 public interface DriverService {
-    List<Driver> getAll();
-    List<Driver> getByDate(DateTime date);
-    Driver addDriver(Driver driver);
+    List<DriverDto> getAll();
+    List<DriverDto> getByDate(DateTime date);
+    DriverDto createDriver(DriverDto driver);
 }

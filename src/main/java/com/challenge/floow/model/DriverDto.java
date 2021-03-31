@@ -1,35 +1,33 @@
 package com.challenge.floow.model;
 
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.Objects;
 
-public class Driver {
-    @CsvBindByName(column = "Id", required = true)
-    private long id;
-
-    @CsvBindByName(column = "First Name", required = true)
+public class DriverDto {
+    @JsonProperty("firstname")
     private String firstName;
 
-    @CsvBindByName(column = "Last Name", required = true)
+    @JsonProperty("lastname")
     private String lastName;
 
-    @CsvDate("dd/MM/yyyy hh:mm:ss")
-    @CsvBindByName(column = "DOB", required = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("date_of_birth")
     private Date dob;
 
-    @CsvDate("dd/MM/yyyy hh:mm:ss")
-    @CsvBindByName(column = "Created Date", required = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("created_at")
     private Date createdDate;
 
-    public long getId() {
-        return id;
-    }
+    public DriverDto() {}
 
-    public void setId(long id) {
-        this.id = id;
+    public DriverDto(String firstName, String lastName, Date dob, Date createdDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.createdDate = createdDate;
     }
 
     public String getFirstName() {
@@ -68,20 +66,19 @@ public class Driver {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Driver driver = (Driver) o;
-        return id == driver.id && Objects.equals(firstName, driver.firstName) && Objects.equals(lastName, driver.lastName) && Objects.equals(dob, driver.dob) && Objects.equals(createdDate, driver.createdDate);
+        DriverDto driverDto = (DriverDto) o;
+        return Objects.equals(firstName, driverDto.firstName) && Objects.equals(lastName, driverDto.lastName) && Objects.equals(dob, driverDto.dob) && Objects.equals(createdDate, driverDto.createdDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, dob, createdDate);
+        return Objects.hash(firstName, lastName, dob, createdDate);
     }
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+        return "DriverDto{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
                 ", createdDate=" + createdDate +

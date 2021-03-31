@@ -47,9 +47,9 @@ public class DriverRepositoryImpl implements DriverRepository {
 
     @Override
     public Driver addDriver(Driver driver) {
+        List<Driver> allDrivers = getAllDrivers();
 
         try (Writer writer = new FileWriter("drivers.csv")) {
-            List<Driver> allDrivers = getAllDrivers();
             StatefulBeanToCsv sbc = new StatefulBeanToCsvBuilder(writer)
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                     .build();
