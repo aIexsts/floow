@@ -37,8 +37,11 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDto createDriver(DriverDto driver) {
-        Driver createdDriver = driverRepository.addDriver(convertToModel(driver));
-        return convertToDto(createdDriver);
+        if (driver != null && driver.getFirstName() != null && driver.getLastName() != null && driver.getDob() != null){
+            Driver createdDriver = driverRepository.addDriver(convertToModel(driver));
+            return convertToDto(createdDriver);
+        }
+        return null;
     }
 
     private Driver convertToModel(DriverDto driverDTO) {
